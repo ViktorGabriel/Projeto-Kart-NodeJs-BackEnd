@@ -38,7 +38,7 @@ async function getRandomBlock() {
 }
 
 async function logRollResult(characterName, block, diceResult, attribute) {
-    console.log(`${characterName} 🎲 rolou um dado de ${block} ${diceResult}`)
+    console.log(`${characterName} 🎲 rolou um dado de ${block} ${diceResult} + ${attribute} = ${diceResult + attribute}`)
 }
 
 async function playEngine(character1, character2) {
@@ -48,7 +48,7 @@ async function playEngine(character1, character2) {
         //sortear o bloco
         let block =  await getRandomBlock()
         console.log(`Bloco: ${block}`)
-    }
+
         // rolar dados
         let diceResult1 = await rollDice()
         let diceResult2 = await rollDice()
@@ -61,24 +61,54 @@ async function playEngine(character1, character2) {
         totalTestSkill1 = diceResult1 + character1.velocidade;
         totalTestSkill2 = diceResult2 + character2.velocidade;
 
-        await logRollResult(character1.name, 
+        await logRollResult(
+            character1.name, 
             "velocidade", 
             diceResult1, 
             character1.velocidade
         );
+
+        await logRollResult(
+            character2.name, 
+            "velocidade", 
+            diceResult2, 
+            character2.velocidade
+        );
     }
+    
     if(block === "Curva"){
         totalTestSkill1 = diceResult1 + character1.manobrabilidade;
         totalTestSkill2 = diceResult2 + character2.manobrabilidade;
+
+        await logRollResult(
+            character1.name, 
+            "manobrabilidade", 
+            diceResult1, 
+            character1.manobrabilidade
+        );
+
+        await logRollResult(
+            character2.name, 
+            "manobrabilidade", 
+            diceResult2, 
+            character2.manobrabilidade
+        );
+
+        
     }
+
     if(block === "Confronto"){
         let powerResult1 = diceResult1 + character1.poder;
         let powerResult2 = diceResult2 + character2.poder;
+
+        
     }
+    }
+        
 }
 
 (async function main(){
-    console.log(`A corrida entre ${player1.name} e ${player2.name} esta comçando...`)
+    console.log(`🏁 A corrida entre ${player1.name} e ${player2.name} esta comçando...`)
 
     playEngine(player1, player2)
 })()
