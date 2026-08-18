@@ -1,17 +1,23 @@
-const BlockStrategy = require("./BlockStrategy");
+import { IPlayer } from "../interfaces/IPlayer";
+import { LogResultFn } from "../interfaces/IRace";
+import { BlockStrategy } from "./BlockStrategy";
 
 /**
  * RetaStrategy — Resolves "Reta" blocks using the `velocidade` attribute.
  *
  * Awards 1 point to the player with the highest (dice + velocidade) total.
+ * In case of a tie, no points are awarded.
  */
-class RetaStrategy extends BlockStrategy {
-  /**
-   * @inheritdoc
-   */
-  async resolve(character1, character2, dice1, dice2, logResult) {
-    const total1 = dice1 + character1.velocidade;
-    const total2 = dice2 + character2.velocidade;
+export class RetaStrategy extends BlockStrategy {
+  public async resolve(
+    character1: IPlayer,
+    character2: IPlayer,
+    dice1: number,
+    dice2: number,
+    logResult: LogResultFn
+  ): Promise<void> {
+    const total1: number = dice1 + character1.velocidade;
+    const total2: number = dice2 + character2.velocidade;
 
     logResult(character1.name, "velocidade", dice1, character1.velocidade);
     logResult(character2.name, "velocidade", dice2, character2.velocidade);
@@ -25,5 +31,3 @@ class RetaStrategy extends BlockStrategy {
     }
   }
 }
-
-module.exports = RetaStrategy;
