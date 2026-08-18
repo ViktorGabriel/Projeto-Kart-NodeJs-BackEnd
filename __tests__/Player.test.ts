@@ -1,11 +1,11 @@
-const Player = require("../src/models/Player");
+import { Player } from "../src/models/Player";
+import { IPlayerProps } from "../src/interfaces/IPlayer";
 
 describe("Player", () => {
   /**
-   * Helper: creates a default test player.
-   * @returns {Player}
+   * Helper: creates a default test player with optional overrides.
    */
-  const makePlayer = (overrides = {}) =>
+  const makePlayer = (overrides: Partial<IPlayerProps> = {}): Player =>
     new Player({
       name: "TestPlayer",
       velocidade: 4,
@@ -88,12 +88,12 @@ describe("Player", () => {
   describe("toString()", () => {
     it("should return a formatted string with all attributes", () => {
       const player = makePlayer();
-      const result = player.toString();
+      const result: string = player.toString();
 
       expect(result).toContain("TestPlayer");
-      expect(result).toContain("4");   // velocidade
-      expect(result).toContain("3");   // manobrabilidade / poder
-      expect(result).toContain("0");   // pontos
+      expect(result).toContain("4"); // velocidade
+      expect(result).toContain("3"); // manobrabilidade / poder
+      expect(result).toContain("0"); // pontos
     });
   });
 });
