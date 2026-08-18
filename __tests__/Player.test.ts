@@ -3,7 +3,7 @@ import { IPlayerProps } from "../src/interfaces/IPlayer";
 
 describe("Player", () => {
   /**
-   * Helper: creates a default test player with optional overrides.
+   * Helper: cria um jogador de teste padrão com sobrescritas opcionais.
    */
   const makePlayer = (overrides: Partial<IPlayerProps> = {}): Player =>
     new Player({
@@ -14,7 +14,7 @@ describe("Player", () => {
       ...overrides,
     });
 
-  // ── Constructor ────────────────────────────────────────────────────────────
+  // ── Construtor ────────────────────────────────────────────────────────────
 
   describe("constructor", () => {
     it("should assign all attributes correctly", () => {
@@ -32,7 +32,7 @@ describe("Player", () => {
     });
   });
 
-  // ── addPoint ───────────────────────────────────────────────────────────────
+  // ── addPoint() ─────────────────────────────────────────────────────────────
 
   describe("addPoint()", () => {
     it("should increment pontos by 1 by default", () => {
@@ -56,7 +56,7 @@ describe("Player", () => {
     });
   });
 
-  // ── losePoint ─────────────────────────────────────────────────────────────
+  // ── losePoint() ───────────────────────────────────────────────────────────
 
   describe("losePoint()", () => {
     it("should decrement pontos by 1", () => {
@@ -68,7 +68,6 @@ describe("Player", () => {
 
     it("should NOT go below 0 (guard clause)", () => {
       const player = makePlayer();
-      // pontos already at 0
       player.losePoint();
       expect(player.pontos).toBe(0);
     });
@@ -83,7 +82,7 @@ describe("Player", () => {
     });
   });
 
-  // ── toString ───────────────────────────────────────────────────────────────
+  // ── toString() ────────────────────────────────────────────────────────────
 
   describe("toString()", () => {
     it("should return a formatted string with all attributes", () => {
@@ -91,9 +90,9 @@ describe("Player", () => {
       const result: string = player.toString();
 
       expect(result).toContain("TestPlayer");
-      expect(result).toContain("4"); // velocidade
-      expect(result).toContain("3"); // manobrabilidade / poder
-      expect(result).toContain("0"); // pontos
+      expect(result).toContain("4");
+      expect(result).toContain("3");
+      expect(result).toContain("0");
     });
   });
 });

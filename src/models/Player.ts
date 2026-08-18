@@ -1,10 +1,10 @@
 import { IPlayer, IPlayerProps } from "../interfaces/IPlayer";
 
 /**
- * Player — Concrete implementation of the IPlayer domain entity.
+ * Player — Implementação concreta da entidade de domínio IPlayer.
  *
- * Encapsulates all kart-racing player state and the mutation methods
- * that represent valid game transitions (earning / losing points).
+ * Encapsula todo o estado de um jogador de kart e os métodos de mutação
+ * que representam transições válidas do jogo (ganhar / perder pontos).
  */
 export class Player implements IPlayer {
   public readonly name: string;
@@ -22,16 +22,16 @@ export class Player implements IPlayer {
   }
 
   /**
-   * Adds points to the player's score.
-   * @param amount - Points to add (default: 1)
+   * Adiciona pontos à pontuação do jogador.
+   * @param amount - Pontos a adicionar (padrão: 1)
    */
   public addPoint(amount: number = 1): void {
     this.pontos += amount;
   }
 
   /**
-   * Removes one point from the player's score.
-   * Score is floored at 0 — it can never go negative.
+   * Remove um ponto da pontuação do jogador.
+   * A pontuação tem piso em 0 — nunca pode ser negativa.
    */
   public losePoint(): void {
     if (this.pontos > 0) {
@@ -40,9 +40,10 @@ export class Player implements IPlayer {
   }
 
   /**
-   * Returns a human-readable summary of the player's current state.
+   * Retorna um resumo legível do estado atual do jogador.
    */
   public toString(): string {
     return `${this.name} — Vel:${this.velocidade} Man:${this.manobrabilidade} Pod:${this.poder} | Pts:${this.pontos}`;
   }
 }
+

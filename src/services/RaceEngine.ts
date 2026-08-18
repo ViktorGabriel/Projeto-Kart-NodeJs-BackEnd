@@ -8,11 +8,11 @@ import {
 import { DiceService } from "./DiceService";
 
 /**
- * RaceEngine — Orchestrates a full race between two players.
+ * RaceEngine — Orquestra uma corrida completa entre dois jogadores.
  *
- * Depends on IDiceService (not the concrete class) and receives block
- * strategies via a StrategyResolver function — both dependencies are
- * injected, keeping this class fully decoupled and independently testable.
+ * Depende de IDiceService (não da classe concreta) e recebe as estratégias
+ * de bloco via uma função StrategyResolver — ambas as dependências são
+ * injetadas, mantendo esta classe totalmente desacoplada e testável de forma independente.
  */
 export class RaceEngine {
   public static readonly TOTAL_ROUNDS: number = 5;
@@ -24,7 +24,7 @@ export class RaceEngine {
   }
 
   /**
-   * Logs a formatted dice roll result to the console.
+   * Registra no console o resultado formatado de uma rolagem de dado.
    */
   private _logRollResult: LogResultFn = (
     name: string,
@@ -38,11 +38,11 @@ export class RaceEngine {
   };
 
   /**
-   * Executes the full race across all rounds.
+   * Executa a corrida completa ao longo de todas as rodadas.
    *
-   * @param character1       - First player
-   * @param character2       - Second player
-   * @param strategyResolver - Maps a BlockType to the correct IBlockStrategy
+   * @param character1       - Primeiro jogador
+   * @param character2       - Segundo jogador
+   * @param strategyResolver - Mapeia um BlockType para o IBlockStrategy correto
    */
   public async run(
     character1: IPlayer,
@@ -71,10 +71,10 @@ export class RaceEngine {
   }
 
   /**
-   * Evaluates final scores and prints the race winner.
+   * Avalia as pontuações finais e exibe o vencedor da corrida.
    *
-   * @param character1 - First player
-   * @param character2 - Second player
+   * @param character1 - Primeiro jogador
+   * @param character2 - Segundo jogador
    */
   public declareWinner(character1: IPlayer, character2: IPlayer): void {
     console.log(`\nResultado final:`);
@@ -90,3 +90,4 @@ export class RaceEngine {
     }
   }
 }
+

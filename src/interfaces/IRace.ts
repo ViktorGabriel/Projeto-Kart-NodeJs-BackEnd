@@ -1,18 +1,19 @@
 import { IPlayer } from "./IPlayer";
 
 /**
- * BlockType — Union of all valid track block names.
+ * BlockType — União de todos os nomes válidos de blocos da pista.
  *
- * Using a literal union instead of `string` lets TypeScript catch
- * any typo at compile-time (e.g. "Retta" would be a type error).
+ * Usar uma união literal em vez de `string` permite que o TypeScript
+ * detecte qualquer erro de digitação em tempo de compilação
+ * (ex: "Retta" seria um erro de tipo).
  */
 export type BlockType = "Reta" | "Curva" | "Confronto";
 
 /**
- * LogResultFn — Signature of the dice-roll logging callback.
+ * LogResultFn — Assinatura do callback de registro da rolagem de dados.
  *
- * Passed from RaceEngine into each BlockStrategy so the strategy
- * can format its own output without coupling to `console.log`.
+ * Passado do RaceEngine para cada BlockStrategy, permitindo que a estratégia
+ * formate sua própria saída sem acoplamento direto ao `console.log`.
  */
 export type LogResultFn = (
   name: string,
@@ -22,22 +23,22 @@ export type LogResultFn = (
 ) => void;
 
 /**
- * IBlockStrategy — Contract for all block resolution strategies.
+ * IBlockStrategy — Contrato para todas as estratégias de resolução de bloco.
  *
- * Each concrete strategy (Reta, Curva, Confronto) MUST implement
- * this interface. RaceEngine depends only on IBlockStrategy, never
- * on concrete classes — fulfilling the Dependency Inversion Principle.
+ * Cada estratégia concreta (Reta, Curva, Confronto) DEVE implementar
+ * esta interface. O RaceEngine depende apenas de IBlockStrategy, nunca
+ * de classes concretas — satisfazendo o Princípio da Inversão de Dependência.
  */
 export interface IBlockStrategy {
   /**
-   * Resolves a single block round: computes totals, logs results,
-   * and mutates the players' `pontos` as appropriate.
+   * Resolve uma rodada de bloco: calcula os totais, registra os resultados
+   * e modifica o campo `pontos` dos jogadores conforme apropriado.
    *
-   * @param character1 - First player
-   * @param character2 - Second player
-   * @param dice1      - Raw dice roll for character1 (1–6)
-   * @param dice2      - Raw dice roll for character2 (1–6)
-   * @param logResult  - Callback to log a formatted roll result
+   * @param character1 - Primeiro jogador
+   * @param character2 - Segundo jogador
+   * @param dice1      - Resultado bruto do dado do character1 (1–6)
+   * @param dice2      - Resultado bruto do dado do character2 (1–6)
+   * @param logResult  - Callback para registrar o resultado formatado da rolagem
    */
   resolve(
     character1: IPlayer,
@@ -49,20 +50,21 @@ export interface IBlockStrategy {
 }
 
 /**
- * StrategyResolver — Function that maps a BlockType to its strategy.
+ * StrategyResolver — Função que mapeia um BlockType para sua estratégia.
  *
- * Injected into RaceEngine.run(), keeping the engine decoupled from
- * all concrete strategy implementations.
+ * Injetada em RaceEngine.run(), mantendo o motor desacoplado de todas
+ * as implementações concretas de estratégia.
  */
 export type StrategyResolver = (block: BlockType) => IBlockStrategy;
 
 /**
- * IDiceService — Contract for all randomization used on the track.
+ * IDiceService — Contrato para toda a aleatoriedade utilizada na pista.
  */
 export interface IDiceService {
-  /** Returns a random integer between 1 and 6 (inclusive). */
+  /** Retorna um inteiro aleatório entre 1 e 6 (inclusivo). */
   rollDice(): number;
 
-  /** Returns a random BlockType. */
+  /** Retorna um BlockType aleatório. */
   getRandomBlock(): BlockType;
 }
+

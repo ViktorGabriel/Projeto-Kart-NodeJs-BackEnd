@@ -2,21 +2,20 @@ import { IPlayer } from "../interfaces/IPlayer";
 import { IBlockStrategy, LogResultFn } from "../interfaces/IRace";
 
 /**
- * BlockStrategy — Abstract base class for all block-resolution strategies.
+ * BlockStrategy — Classe base abstrata para todas as estratégias de resolução de bloco.
  *
- * Implements IBlockStrategy and throws a descriptive error if a subclass
- * forgets to override `resolve`. Using an abstract class (instead of a
- * plain interface) allows subclasses to share common helpers in the future.
+ * Implementa IBlockStrategy. Usar uma classe abstrata (em vez de uma interface
+ * simples) permite que subclasses compartilhem helpers comuns no futuro.
  */
 export abstract class BlockStrategy implements IBlockStrategy {
   /**
-   * Resolves a single round block. Subclasses MUST override this method.
+   * Resolve um bloco de rodada. As subclasses DEVEM sobrescrever este método.
    *
-   * @param character1 - First player
-   * @param character2 - Second player
-   * @param dice1      - Raw dice roll for character1
-   * @param dice2      - Raw dice roll for character2
-   * @param logResult  - Formatted roll-result logger callback
+   * @param character1 - Primeiro jogador
+   * @param character2 - Segundo jogador
+   * @param dice1      - Resultado bruto do dado do character1
+   * @param dice2      - Resultado bruto do dado do character2
+   * @param logResult  - Callback de registro formatado do resultado da rolagem
    */
   public abstract resolve(
     character1: IPlayer,
@@ -26,3 +25,4 @@ export abstract class BlockStrategy implements IBlockStrategy {
     logResult: LogResultFn
   ): Promise<void>;
 }
+

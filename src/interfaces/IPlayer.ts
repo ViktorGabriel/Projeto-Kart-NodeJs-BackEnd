@@ -1,45 +1,44 @@
 /**
- * IPlayer — Domain contract for a kart racing player.
+ * IPlayer — Contrato de domínio para um jogador de corrida de kart.
  *
- * All code that interacts with a player entity MUST depend on this
- * interface, never on the concrete `Player` class directly. This
- * decouples the domain logic from the implementation and enables
- * easy mocking in tests.
+ * Todo código que interage com uma entidade de jogador DEVE depender desta
+ * interface, nunca diretamente da classe concreta `Player`. Isso desacopla
+ * a lógica de domínio da implementação e facilita a criação de mocks em testes.
  */
 export interface IPlayer {
-  /** Display name of the player / character. */
+  /** Nome de exibição do jogador / personagem. */
   readonly name: string;
 
-  /** Speed attribute — used to resolve "Reta" blocks. */
+  /** Atributo de velocidade — usado para resolver blocos do tipo "Reta". */
   readonly velocidade: number;
 
-  /** Handling attribute — used to resolve "Curva" blocks. */
+  /** Atributo de manobrabilidade — usado para resolver blocos do tipo "Curva". */
   readonly manobrabilidade: number;
 
-  /** Power attribute — used to resolve "Confronto" blocks. */
+  /** Atributo de poder — usado para resolver blocos do tipo "Confronto". */
   readonly poder: number;
 
-  /** Current accumulated score. Always >= 0. */
+  /** Pontuação acumulada atual. Sempre >= 0. */
   pontos: number;
 
   /**
-   * Adds points to the player's score.
-   * @param amount - Points to add. Defaults to 1.
+   * Adiciona pontos à pontuação do jogador.
+   * @param amount - Pontos a adicionar. Padrão: 1.
    */
   addPoint(amount?: number): void;
 
   /**
-   * Removes one point from the player's score.
-   * Score cannot go below 0.
+   * Remove um ponto da pontuação do jogador.
+   * A pontuação não pode ser inferior a 0.
    */
   losePoint(): void;
 
-  /** Returns a human-readable summary of the player's state. */
+  /** Retorna um resumo legível do estado atual do jogador. */
   toString(): string;
 }
 
 /**
- * IPlayerProps — Shape of the object passed to the Player constructor.
+ * IPlayerProps — Formato do objeto passado ao construtor de Player.
  */
 export interface IPlayerProps {
   name: string;
@@ -47,3 +46,4 @@ export interface IPlayerProps {
   manobrabilidade: number;
   poder: number;
 }
+

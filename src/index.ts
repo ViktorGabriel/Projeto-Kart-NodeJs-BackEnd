@@ -1,14 +1,14 @@
 /**
- * src/index.ts — Application entry point (Composition Root).
+ * src/index.ts — Ponto de entrada da aplicação (Raiz de Composição).
  *
- * Responsibilities:
- *   1. Instantiate domain objects (Players)
- *   2. Compose the race engine with its dependencies
- *   3. Wire strategy resolution (Strategy Pattern)
- *   4. Bootstrap the race
+ * Responsabilidades:
+ *   1. Instanciar os objetos de domínio (Players)
+ *   2. Compor o motor de corrida com suas dependências
+ *   3. Conectar a resolução de estratégias (Strategy Pattern)
+ *   4. Inicializar a corrida
  *
- * Zero business logic lives here — all decisions belong to their
- * respective domain classes (Player, RaceEngine, *Strategy).
+ * Nenhuma lógica de negócio vive aqui — todas as decisões pertencem
+ * às suas respectivas classes de domínio (Player, RaceEngine, *Strategy).
  */
 
 import { Player } from "./models/Player";
@@ -19,7 +19,7 @@ import { CurvaStrategy } from "./strategies/CurvaStrategy";
 import { ConfrontoStrategy } from "./strategies/ConfrontoStrategy";
 import { BlockType, IBlockStrategy, StrategyResolver } from "./interfaces/IRace";
 
-// ── Players ────────────────────────────────────────────────────────────────
+// ── Jogadores ──────────────────────────────────────────────────────────────
 const player1 = new Player({
   name: "Mario",
   velocidade: 4,
@@ -34,8 +34,8 @@ const player2 = new Player({
   poder: 4,
 });
 
-// ── Strategy Map ──────────────────────────────────────────────────────────
-// Singleton-per-run: each strategy is instantiated once and reused.
+// ── Mapa de Estratégias ────────────────────────────────────────────────────
+// Singleton por execução: cada estratégia é instanciada uma única vez e reutilizada.
 const strategies: Record<BlockType, IBlockStrategy> = {
   Reta: new RetaStrategy(),
   Curva: new CurvaStrategy(),
@@ -43,16 +43,16 @@ const strategies: Record<BlockType, IBlockStrategy> = {
 };
 
 /**
- * Resolves the correct block strategy by name.
- * Throws at runtime if an unknown block is encountered.
+ * Resolve a estratégia de bloco correta pelo nome.
+ * Lança um erro em tempo de execução se um bloco desconhecido for encontrado.
  */
 const strategyResolver: StrategyResolver = (block: BlockType): IBlockStrategy => {
   const strategy = strategies[block];
-  if (!strategy) throw new Error(`Unknown block: "${block}"`);
+  if (!strategy) throw new Error(`Bloco desconhecido: "${block}"`);
   return strategy;
 };
 
-// ── Composition Root & Race Bootstrap ─────────────────────────────────────
+// ── Raiz de Composição & Inicialização da Corrida ─────────────────────────
 (async function main(): Promise<void> {
   const diceService = new DiceService();
   const engine = new RaceEngine(diceService);
